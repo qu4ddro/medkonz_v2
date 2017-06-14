@@ -1,11 +1,11 @@
-<div class='stickman' id="stickman">
+<div class='stickman' ng-class="{'walking': stickman.IsMoving}" id="stickman" tabindex="0" ng-keydown="stickman.Move($event)" ng-keyup="stickman.EndMove($event)">
   <div class='head'>
     <img src="assets/images/portraits/bobblehead.png">
   </div>
   <div class='body'>
-    <div class='arm' ng-class="{'walking': vm.IsMoving}" id='left'></div>
-    <div class='arm' ng-class="{'walking': vm.IsMoving}" id='right'></div>
-    <div class='leg' ng-class="{'walking': vm.IsMoving}" id='left'></div>
-    <div class='leg' ng-class="{'walking': vm.IsMoving}" id='right'></div>
+    <div class='arm' ng-class="{'walking': stickman.IsMoving}" id='left'></div>
+    <div class='arm' ng-class="{'walking': stickman.IsMoving}" id='right'></div>
+    <div class='leg' ng-class="{'walking': stickman.IsMoving}" id='left'></div>
+    <div class='leg' ng-class="{'walking': stickman.IsMoving}" id='right'></div>
   </div>
 </div>

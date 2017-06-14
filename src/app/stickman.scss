@@ -5,116 +5,103 @@
     top: 87%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: 0.5s walk-body ease-in infinite;
-    -webkit-animation-play-state:paused;
-    -moz-animation-play-state:paused;
-    -o-animation-play-state:paused;
-    animation-play-state:paused;
-}
-.stickman .head {
-    height: 4em;
-    width: 4em;
-    position: absolute;
-    top: -0.7em;
-    left: 22.6%;
-    background-color: #111;
-    border-radius: 100%;
-    z-index: 5;
+    animation: 1s walk-body infinite;
+
+    .head {
+      height: 4em;
+      width: 4em;
+      position: absolute;
+      top: -0.7em;
+      left: 22.6%;
+      background-color: #111;
+      border-radius: 100%;
+      z-index: 5;
+    }
+
+    .body {
+        height: 3em;
+        width: 0.45em;
+        position: absolute;
+        top: 5em;
+        left: 50%;
+        margin-left: -0.3125em;
+        background-color: #6e6e6e;
+
+
+
+        .arm {
+          height: 2em;
+          width: 0.425em;
+          position: absolute;
+          top: 0;
+          transform: rotate(-45deg);
+          transform-origin: top;
+          background-color: #6e6e6e;
+          animation: 1s walk-arm infinite;
+
+        }
+        .arm#left {
+            animation-delay: 0.5s;
+            background-color: #6e6e6e;
+        }
+        .arm#left::after {
+            animation-delay: 0.5s;
+            background-color: #6e6e6e;
+        }
+        .arm::after {
+            content: "";
+            height: 1.63333em;
+            width: 0.425em;
+            left: -0.2em;
+            position: absolute;
+            bottom: 0em;
+            transform: rotate(70deg);
+            transform-origin: right bottom;
+            background-color: #6e6e6e;
+        }
+        .leg {
+          height: 1.5em;
+          width: 0.425em;
+          position: absolute;
+          bottom: -1.36667em;
+          transform: rotate(-90deg);
+          transform-origin: top;
+          background-color: #6e6e6e;
+          animation: 1s walk-leg infinite;
+        }
+        .leg#right {
+          background-color: #6e6e6e;
+          animation-delay: 0.5s;
+        }
+        .leg#right::after {
+          background-color: #6e6e6e;
+          animation-delay: 0.5s;
+        }
+        .leg::after {
+          content: "";
+          height: 1.4em;
+          width: 0.425em;
+          position: absolute;
+          bottom: -1.26667em;
+          transform: rotate(112.5deg);
+          transform-origin: top;
+          background-color: #6e6e6e;
+          left: 0em;
+        }
+    }
 }
 
-.stickman .body {
-    height: 3em;
-    width: 0.45em;
-    position: absolute;
-    top: 5em;
-    left: 50%;
-    margin-left: -0.3125em;
-    background-color: #6e6e6e;
-    animation: 1s walk-leg-after infinite;
-    -webkit-animation-play-state:paused;
-    -moz-animation-play-state:paused;
-    -o-animation-play-state:paused;
-    animation-play-state:paused;
+.stickman, .stickman .body .arm, .stickman .body .leg{
+  -webkit-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+  -o-animation-play-state:paused;
+  animation-play-state:paused;
 }
-.stickman .body .arm {
-    height: 2em;
-    width: 0.425em;
-    position: absolute;
-    top: 0;
-    transform: rotate(-45deg);
-    transform-origin: top;
-    background-color: #6e6e6e;
-    animation: 1s walk-arm infinite;
-    -webkit-animation-play-state:paused;
-    -moz-animation-play-state:paused;
-    -o-animation-play-state:paused;
-    animation-play-state:paused;
-}
-.stickman .body .arm#left {
-    animation-delay: 0.5s;
-    background-color: #6e6e6e;
-}
-.stickman .body .arm#left::after {
-    animation-delay: 0.5s;
-    background-color: #6e6e6e;
-}
-.stickman .body .arm::after {
-    content: "";
-    height: 1.63333em;
-    width: 0.425em;
-    left: -0.2em;
-    position: absolute;
-    bottom: 0em;
-    transform: rotate(70deg);
-    transform-origin: right bottom;
-    background-color: #6e6e6e;
-}
-.stickman .body .leg {
-    height: 1.5em;
-    width: 0.425em;
-    position: absolute;
-    bottom: -1.36667em;
-    transform: rotate(-90deg);
-    transform-origin: top;
-    background-color: #6e6e6e;
-}
-.stickman .body .leg#right {
-    background-color: #6e6e6e;
-    animation-delay: 0.5s;
-}
-.stickman .body .leg#right::after {
-    background-color: #6e6e6e;
-    animation-delay: 0.5s;
-}
-.stickman .body .leg::after {
-    content: "";
-    height: 1.4em;
-    width: 0.425em;
-    position: absolute;
-    bottom: -1.26667em;
-    transform: rotate(112.5deg);
-    transform-origin: top;
-    background-color: #6e6e6e;
-    left: 0em;
-}
-.stickman .walking {
-
-    -webkit-animation-play-state:running;
-    -moz-animation-play-state:running;
-    -o-animation-play-state:running;
-    animation-play-state:running;
-}
-.stickman > .body > .walking  {
-    -webkit-animation-play-state:running;
-    -moz-animation-play-state:running;
-    -o-animation-play-state:running;
-    animation-play-state:running;
-}
-.stickman > .arm > .walking {
-    -webkit-animation-play-state:running;
-    -moz-animation-play-state:running;
-    -o-animation-play-state:running;
-    animation-play-state:running;
+.walking {
+    -webkit-animation-play-state:running !important;
+    -moz-animation-play-state:running !important;
+    -o-animation-play-state:running !important;
+    animation-play-state:running !important;
 }
 
 @keyframes walk-body {

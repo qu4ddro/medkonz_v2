@@ -4,6 +4,7 @@ module.exports = {
   ],
   rules: {
     'angular/no-service-method': 0,
-    'object-curly-spacing': "off"
+    'object-curly-spacing': "off",
+    'brace-style' : 'off'
   }
 }
