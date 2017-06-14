@@ -1,0 +1,84 @@
+.timeline-circles:hover{
+    cursor: pointer;
+}
+.timeline-container{
+    text-align: center;
+    min-width: 800px;
+    display: table;
+    width: 800px;
+    margin: auto;
+    z-index: 700;
+}
+.timeline-circles-not-first{
+    position: relative;
+    left: -5px;
+}
+.timeline-container > div{
+    display: table-cell;
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+.timeline-reached{
+    color: white;
+}
+
+.timeline-not-reached-connector {
+    width: 150px;
+    border-bottom: 3px dashed #e2e2e2;
+    position: relative;
+    left: -4px;
+}
+.timeline-reached-connector{
+    width: 150px;
+    border-bottom: 3px solid #e2e2e2;
+    position: relative;
+    left: -4px;
+}
+span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.div2{
+    position: relative;
+    left:-5px;
+}
+.div3{
+    position: relative;
+    left:-10px;
+}
+.div4{
+    position: relative;
+    left:-15px;
+}
+.div5{
+    position: relative;
+    left:-20px;
+}
+.test{
+    position: absolute;
+    top:10%;
+    left:70%;
+}
+
+.test2{
+    position: absolute;
+    top:60%;
+    left:20%;
+}
+
+.fade-element-in.ng-enter {
+    transition: 0.8s linear all;
+    opacity: 0;
+}
+
+.fade-element-in.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+.fade-element-in.ng-leave {
+    transition: 0.3s linear all;
+    opacity: 1;
+}
+.fade-element-in.ng-leave.ng-leave-active {
+    opacity: 0;
+}
