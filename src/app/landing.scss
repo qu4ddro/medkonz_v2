@@ -1,0 +1,64 @@
+#landing #title {
+    position: relative;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+#landing h1{
+    font-size:3em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: auto;
+}
+#landing h2 {
+    font-size:2em;
+    font-weight: 400;
+    margin-top: -0.25em;
+    width: auto;
+}
+#landing .quote {
+    position: absolute;
+    max-width: 20vw;
+    max-height: 6em;
+    font-style: italic;
+    text-align: left;
+}
+
+
+/*------ QUOTES POSITIONING -------*/
+#landing > #quote1 {
+    top: 83vh;
+    left: 18vw;
+}
+#landing > #quote2 {
+    top: 63vh;
+    left: 9vw;
+}#landing > #quote3 {
+     top: 29vh;
+     left: 4vw;
+ }
+#landing > #quote4 {
+    top: 5vh;
+    left: 10vw;
+}
+#landing > #quote5 {
+    top: 7vh;
+    left: 43vw;
+}
+#landing > #quote6 {
+    top: 2vh;
+    left: 73vw;
+}
+#landing > #quote7 {
+    top: 29vh;
+    left: 74vw;
+}
+#landing > #quote8 {
+    top: 52vh;
+    left: 76vw;
+}
+#landing > #quote9 {
+    top: 79vh;
+    left: 61vw;
+}

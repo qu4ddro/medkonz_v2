@@ -2,8 +2,19 @@ angular
   .module('app')
   .component('app', {
     templateUrl: 'app/main.html',
-    controllerAs: 'stickman',
-    controller: ('appcontroller', function () {
+    controller: mainController,
+    controllerAs: 'main',
+    scope: {
+      ngValue: '=',
+      ngModel: '='
     }
-    )
   });
+function mainController($log) {
+  var vm = this;
+  // vm.StickPos = stickman.StickPos;
+  vm.$onInit = init();
+
+  function init() {
+    $log.log(vm.StickPos);
+  }
+}

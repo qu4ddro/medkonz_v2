@@ -9,62 +9,66 @@ angular
       ngModel: '='
     }
   });
+
 function stickmanController($timeout, $document, $log) {
   var vm = this;
 
+  vm.$onInit = init();
+
   vm.Move = move;
+  vm.MoveOnArrow = moveOnArrow;
   vm.EndMove = endmove;
-  vm.StickPos = [0, 0]; //x,y
+  vm.StickPos = [0, 0]; // x,y
   vm.IsMoving = null;
 
-  function move(event) {
+  function init() {
     var stick = $document[0].getElementById('stickman');
-    $log.log(event);
+    // $log.log($('body').innerWidth()*-1/2);
+    TweenLite.from(stick, 4, { left: vm.Viewport = $('body').innerWidth() * -1 / 2 });
+    vm.IsMoving = true;
+  }
 
+  function moveOnArrow(event) {
+    var stick = $document[0].getElementById('stickman');
+    var posX = vm.StickPos[0];
+    var posY = vm.StickPos[1];
+    var moveTime = 0.2;
     if (event.key === 'ArrowDown' && event.key === 'ArrowRight') {
-      vm.StickPos[0] += 10;
-      vm.StickPos[1] += 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
+      posX += 10;
+      posY += 10;
+      move(stick, posX, posY, 0.2);
     }
     else if (event.key === 'ArrowDown' && event.key === 'ArrowLeft') {
       vm.StickPos[0] += 10;
       vm.StickPos[1] -= 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
     }
     else if (event.key === 'ArrowUp' && event.key === 'ArrowRight') {
       vm.StickPos[0] -= 10;
       vm.StickPos[1] += 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
     }
     else if (event.key === 'ArrowUp' && event.key === 'ArrowLeft') {
       vm.StickPos[0] -= 10;
       vm.StickPos[1] -= 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
     }
     else if (event.key === 'ArrowDown') {
       vm.StickPos[1] += 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
     }
     else if (event.key === 'ArrowUp') {
       vm.StickPos[1] -= 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
     }
     else if (event.key === 'ArrowRight') {
       vm.StickPos[0] += 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
     }
     else if (event.key === 'ArrowLeft') {
       vm.StickPos[0] -= 10;
-      TweenLite.to(stick, 0.2, { x: vm.StickPos[0], y: vm.StickPos[1] });
-      vm.IsMoving = true;
     }
+    move(stick, vm.StickPos[0], vm.StickPos[1], moveTime);
+  }
+
+  function move(item, posX, posY, time) {
+    // $log.log('posX: ' + posX + 'posY: ' + posY + 'time: ' + time);
+    TweenLite.to(item, time, { x: posX, y: posY });
+    vm.IsMoving = true;
   }
 
   function endmove(event) {
