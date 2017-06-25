@@ -1,13 +1,11 @@
 angular
   .module('app')
   .component('stickman', {
+    transclude: true,
     templateUrl: 'app/stickman.html',
     controller: stickmanController,
     controllerAs: 'stickman',
-    scope: {
-      ngValue: '=',
-      ngModel: '='
-    }
+    scope: 'true'
   });
 
 function stickmanController($timeout, $document, $log) {

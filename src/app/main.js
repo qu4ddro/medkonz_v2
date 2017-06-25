@@ -1,20 +1,21 @@
 angular
   .module('app')
   .component('app', {
+    transclude: true,
     templateUrl: 'app/main.html',
     controller: mainController,
     controllerAs: 'main',
-    scope: {
-      ngValue: '=',
-      ngModel: '='
-    }
+    scope: 'true'
   });
-function mainController($log) {
+function mainController($log, stickman) {
   var vm = this;
+  var einzwei = 12;
+
   // vm.StickPos = stickman.StickPos;
   vm.$onInit = init();
 
   function init() {
-    $log.log(vm.StickPos);
+    $log.log(stickman.StickPos);
+    // $log.log(stickman.StickPos);
   }
 }
