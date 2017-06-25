@@ -1,9 +1,128 @@
-<div class="main-container">
-  <main class="main">
-    <em-nav></em-nav>
-    <stickman></stickman>
-    <landing></landing>
-    <timeline></timeline>
-    <ending></ending>
+<div id="main-container">
+  <main id="main">
+    <nav>
+        <ul>
+            <li><a href="#landing">landing</a></li>
+            <li><a href="#timeline">timeline</a></li>
+            <li><a href="#end">end</a></li>
+        </ul>
+    </nav>
+
+    <div class='stickman' id="stickman" ng-class="{'walking': stickman.IsMoving}" tabindex="0" ng-click="$log.log('gogo')" ng-keydown="$log.log('gogo')" ng-keyup="EndMove($event)" >
+        <div class='head wobble'>
+            <img src="assets/images/portraits/bobblehead.png">
+        </div>
+        <div class='body'>
+            <div class='arm' ng-class="{'walking': vm.IsMoving}" id='left'></div>
+            <div class='arm' ng-class="{'walking': vm.IsMoving}" id='right'></div>
+            <div class='leg' ng-class="{'walking': vm.IsMoving}" id='left'></div>
+            <div class='leg' ng-class="{'walking': vm.IsMoving}" id='right'></div>
+        </div>
+    </div>
+
+    <section id="landing" class="wholePage">
+        <div id="title">
+            <h1>ELON MUSK<!--TODO: Animation auf "Elon Musk"--></h1>
+            <h2>Pionier unserer Zeit</h2>
+        </div>
+        <!--<div><img src="elon_timeline.svg"></div>-->
+        <div class="quote fade-element-in" ng-if="vm.Comments[0]" id="quote1">"Great Companies are built on great products."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[1]" id="quote2">"When something is important enough, you do it even if the odds are not in your favor."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[2]" id="quote3">"Failure is an option here. If things are not failing, you are not innovating enough."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[3]" id="quote4"> "Some people don't like change, but you need to embrace change if the alternative is disaster."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[4]" id="quote5">"It's OK to have your eggs in one basket as long as you control what happens to that basket."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[5]" id="quote6">"If you're co-founder or CEO, you have to do all kinds of tasks you might not want to do... If you don't do your chores, the company won't succeed... No task is too menial."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[6]" id="quote7">"I don't create companies for the sake of creating companies, but to get things done."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[7]" id="quote8">"Talent is extremely important. It's like a sports team, the team that has the best individual player will often win, but then there's a multiplier from how those players work together and the strategy they employ."</div>
+        <div class="quote fade-element-in" ng-if="vm.Comments[8]" id="quote9">"What makes innovative thinking happen?... I think it's really a mindset. You have to decide."</div>
+    </section>
+
+    <section id="timeline" class="wholePage">
+
+        <div id="timeline-container" class="timeline-container">
+            <div ng-repeat="div in vm.contentDivs track by $index" ng-click="vm.ShowDiv($index)" ng-class="vm.DivPosition[$index]" >
+                <span id="timelinePoint{{$index}}" class="fa fa-3x timeline-circles" ng-class="vm.contentDivsClass[$index]"></span>
+                <span class="timeline-not-reached-connector" ng-class="vm.contentDivsConnector[$index]" ng-if="!$last" ></span>
+            </div>
+        </div>
+
+        <div class="contentBlock" ng-if="vm.contentDivs[0]">
+            <h2>1995: Zip2</h2>
+            <p class="textContainer">Erste Firma die Elon Musk mit seinem Bruder Kimbal gründete. Größtes Produkt stellte ein Online-Dienst für Zeitungen dar, dass beispielsweise Stadtkarten und Verzeichnisse zur Verfügung stellte, sowie spezielle Werbeanzeigen bereitstellte, die Kommunikation zwischen Verkäufer und Kunden ermöglichte. Wurde 1999 von Compaq für 307$ Millionen verkauft, wovon 22$ Millionen an Elon Musk gingen.</p>
+            <div class="mediaContainer">
+            </div>
+        </div>
+
+        <div class="contentBlock" ng-if="vm.contentDivs[1]">
+            <h2>1999: X.com / Paypal</h2>
+            <p class="textContainer">X.com ist ein Onlinebezahlsystem via E-Mail-Addresse und wurde von Elon Musk gegründet. Im Jahr 2000 fusionierte X.com mit dem Unternehmen Confinity, dass auf ein Produkt names PayPal spezialisiert war. Musk war größter Anteilseigner(11,7%).</p>
+            <div class="mediaContainer">
+
+                <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html" >
+                    <div uib-slide ng-repeat="image in  vm.Images_paypal track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
+                        <img ng-src="{{image.image}}" style="margin:auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentBlock" ng-if="vm.contentDivs[2]">
+            <h2>2002: SpaceX</h2>
+            <p class="textContainer">SpaceX ist ein Raumfahrtunternehmen, dessen Ziel es ist Technologien zu entwickeln, die es ermöglichen soll den Weltraum zu kolonisieren. Ein Schritt in diese Richtung ist die Entwicklung von wiederverwendbaren Raketen. Nachdem das Unternehmen 2002 gegründet wurde, beschäftigte die Firma nach drei Jahren 150 Mitarbeiter und wurde 2008 offiziell von der NASA für Versorgungsflüge zur ISS beauftragt. Als erstes Unternehmen überhaupt stellte SpaceX mit der Falcon9 einen wiederverwendbaren “Booster” her, und will damit die Kosten der Raumfahrt beträchtlich reduzieren.</p>
+
+            <div class="mediaContainer">
+
+                <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html" >
+                    <div uib-slide ng-repeat="image in vm.Images_spacex track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
+                        <img ng-src="{{image.image}}" style="margin:auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentBlock" ng-if="vm.contentDivs[3]">
+            <h2>2003: Tesla Motors</h2>
+            <p class="textContainer">Elon investierte in Tesla, ein Fahrzeughersteller, der sich auf Elektroautos spezialisiert hatte. Er ist CEO und Product Architect des Unternehmens. 2014 teilte er alle Patente mit der Welt um die Entwicklung von Elektrofahrzeugen voranzutreiben.</p>
+            <div class="mediaContainer">
+
+                <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html" >
+                    <div uib-slide ng-repeat="image in vm.Images_tesla track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
+                        <img ng-src="{{image.image}}" style="margin:auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentBlock" ng-if="vm.contentDivs[4]">
+            <h2>2013: Hyperloop</h2>
+            <p class="textContainer">SMusk stellt Hyperloop vor, dabei handelt es sich um ein Projekt für Personen- und Güterverkehr. In einer Röhre, in der Vakuum herrscht wird eine Kapsel auf ca. 1200km/h beschleunigt. Somit können Langstrecken schneller als mit dem Flugzeug oder dem Zug zurückgelegt werden.</p>
+            <div class="mediaContainer">
+
+                <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html" >
+                    <div uib-slide ng-repeat="image in vm.Images_hyperloop track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
+                        <img ng-src="{{image.image}}" style="margin:auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentBlock" ng-if="vm.contentDivs[5]">
+            <h2>2017: The Boring Company</h2>
+            <p class="textContainer">The Boring Company soll ein Unternehmen werden, dass den Verkehr in Großstädten regelt. Dazu wolle er eine Tunnelbohrmaschine bauen.</p>
+            <div class="mediaContainer">
+
+                <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html" >
+                    <div uib-slide ng-repeat="image in vm.Images_theboringcompany track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
+                        <img ng-src="{{image.image}}" style="margin:auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="ending" class="wholePage">
+        <h1>Hier kommt das Closing hin</h1>
+    </section>
   </main>
 </div>

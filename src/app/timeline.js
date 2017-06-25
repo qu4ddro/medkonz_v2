@@ -2,6 +2,7 @@ angular
   .module('app')
   .component('timeline', {
     templateUrl: 'app/timeline.html',
+    bindings: { '': '=' },
     controller: timelineController,
     controllerAs: 'timeline',
     scope: {
@@ -10,6 +11,7 @@ angular
     }
   });
 function timelineController($timeout, $document, $log) {
+  /*
   var vm = this;
   vm.contentDivs = [false, false, false, false, false];
   vm.DivPosition = ['', 'div2', 'div3', 'div4', 'div5'];
@@ -175,5 +177,5 @@ function startQuotes(timer) {
     }, 5000);
   }, timer);
 }
-
 */
+}

@@ -6,6 +6,7 @@ module.exports = {
     'angular/no-service-method': 0,
     'object-curly-spacing': "off",
     'brace-style' : 'off',
-    'no-unused-vars' : 'off'
+    'no-unused-vars' : 'off',
+    'linebreak-style' : 'off'
   }
 }

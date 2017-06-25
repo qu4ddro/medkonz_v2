@@ -7,8 +7,8 @@ angular
     controllerAs: 'stickman',
     scope: 'true'
   });
-
-function stickmanController($timeout, $document, $log) {
+function stickmanController($timeout, $document, $log, $window) {
+  /*
   var vm = this;
 
   vm.$onInit = init();
@@ -19,7 +19,14 @@ function stickmanController($timeout, $document, $log) {
   vm.StickPos = [0, 0]; // x,y
   vm.IsMoving = null;
 
-  function init() {
+  $window.addEventListener('keydown', function (e) {
+        // space and arrow keys
+        if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+          e.preventDefault();
+        }
+      }, false);
+
+  function move(event) {
     var stick = $document[0].getElementById('stickman');
     // $log.log($('body').innerWidth()*-1/2);
     TweenLite.from(stick, 4, { left: vm.Viewport = $('body').innerWidth() * -1 / 2 });
@@ -73,5 +80,5 @@ function stickmanController($timeout, $document, $log) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       vm.IsMoving = false;
     }
-  }
+  } */
 }

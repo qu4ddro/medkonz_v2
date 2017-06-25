@@ -1,4 +1,4 @@
-@import 'ending','stickman','landing','timeline';
+@import 'ending','stickman','landing','timeline','nav';
 
 html, body, #root {
   margin: 0;
@@ -35,18 +35,6 @@ main {
 section {
     width:100vw;
     height: 100vh;
-}
-nav {
-    display: none;
-    position: fixed;
-    width: 10vw;
-    text-align: left;
-    top: 50vh;
-    background-color: #003979;
-    z-index:900;
-}
-nav ul {
-    list-style: none;
 }
 img {
     max-width: 100%;
