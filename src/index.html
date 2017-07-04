@@ -6,32 +6,32 @@
   <title>Elon Musk</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/favicon.ico" />
 
   <!-- build:css({.tmp,src}) styles/vendor.css -->
   <!-- bower:css -->
   <!-- run `gulp inject` to automatically populate bower styles dependencies -->
   <!-- endbower -->
   <!-- endbuild -->
-
   <!-- build:css({.tmp,src}) styles/app.css -->
   <link rel="stylesheet" href="index.css" />
   <!-- endbuild -->
 </head>
 
+<body ng-app="myapp" ng-controller="MyAppController as vm" ng-keydown="vm.Move($event)" ng-keyup="vm.EndMove($event)">
 
-<body ng-app="app" ng-controller="MyappController as vm" ng-keydown="vm.Move($event)" ng-keyup="vm.EndMove($event)">
   <main id="main">
     <nav>
       <ul>
-        <li><a href="#landing">landing</a></li>
-        <li><a href="#timeline">timeline</a></li>
-        <li><a href="#closing">end</a></li>
+        <li><a href="#" ng-click="scrollTo('landing')">landing</a></li>
+        <li><a href="#" ng-click="scrollTo('timeline')">timeline</a></li>
+        <li><a href="#" ng-click="scrollTo('closing')">end</a></li>
       </ul>
     </nav>
 
     <div class='stickman' id="stickman">
       <div class='head wobble'>
-        <img src="assets/images/portraits/bobblehead.png">
+        <img ng-class='{flipped: vm.StickmanIsFlipped}' src="assets/images/portraits/bobblehead.png">
       </div>
       <div class='body'>
         <div class='arm' ng-class="{'walking': vm.IsMoving}" id='left'></div>
@@ -43,9 +43,7 @@
 
     <section id="landing" class="wholePage">
       <div id="title">
-        <h1>ELON MUSK
-          <!--TODO: Animation auf "Elon Musk"-->
-        </h1>
+        <h1>ELON MUSK</h1>
         <h2>Pionier unserer Zeit</h2>
       </div>
       <div class="quote fade-element-in" ng-if="vm.Comments[0]" id="quote1">"Great Companies are built on great products."</div>
@@ -77,6 +75,13 @@
           die Kommunikation zwischen Verkäufer und Kunden ermöglichte. Wurde 1999 von Compaq für 307$ Millionen verkauft,
           wovon 22$ Millionen an Elon Musk gingen.</p>
         <div class="mediaContainer">
+          <div ng-carousel ng-carousel-name="SpaceXCarousel" ng-carousel-timer="5000">
+            <slidecontainer class="carousel-slides">
+              <slide ng-repeat="image in vm.imagesSpacex">
+                <img ng-src="{{image.image}}" style="margin:auto;">
+              </slide>
+            </slidecontainer>
+          </div>
         </div>
       </div>
 
@@ -84,12 +89,14 @@
         <h2>1999: X.com / Paypal</h2>
         <p class="textContainer">X.com ist ein Onlinebezahlsystem via E-Mail-Addresse und wurde von Elon Musk gegründet. Im Jahr 2000 fusionierte
           X.com mit dem Unternehmen Confinity, dass auf ein Produkt names PayPal spezialisiert war. Musk war größter Anteilseigner(11,7%).</p>
-        <div class="mediaContainer">
 
-          <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html">
-            <div uib-slide ng-repeat="image in  vm.Images_paypal track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
-              <img ng-src="{{image.image}}" style="margin:auto;">
-            </div>
+        <div class="mediaContainer">
+          <div ng-carousel ng-carousel-name="PayPalCarousel" ng-carousel-timer="5000">
+            <slidecontainer class="carousel-slides">
+              <slide ng-repeat="image in vm.imagesPaypal">
+                <img ng-src="{{image.image}}" style="margin:auto;">
+              </slide>
+            </slidecontainer>
           </div>
         </div>
       </div>
@@ -103,11 +110,12 @@
           einen wiederverwendbaren “Booster” her, und will damit die Kosten der Raumfahrt beträchtlich reduzieren.</p>
 
         <div class="mediaContainer">
-
-          <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html">
-            <div uib-slide ng-repeat="image in vm.Images_spacex track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
-              <img ng-src="{{image.image}}" style="margin:auto;">
-            </div>
+          <div ng-carousel ng-carousel-name="SpaceXCarousel" ng-carousel-timer="5000">
+            <slidecontainer class="carousel-slides">
+              <slide ng-repeat="image in vm.imagesSpacex">
+                <img ng-src="{{image.image}}" style="margin:auto;">
+              </slide>
+            </slidecontainer>
           </div>
         </div>
       </div>
@@ -116,13 +124,15 @@
         <h2>2003: Tesla Motors</h2>
         <p class="textContainer">Elon investierte in Tesla, ein Fahrzeughersteller, der sich auf Elektroautos spezialisiert hatte. Er ist CEO und
           Product Architect des Unternehmens. 2014 teilte er alle Patente mit der Welt um die Entwicklung von Elektrofahrzeugen
-          voranzutreiben.</p>
+          voranzutreiben.
+        </p>
         <div class="mediaContainer">
-
-          <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html">
-            <div uib-slide ng-repeat="image in vm.Images_tesla track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
-              <img ng-src="{{image.image}}" style="margin:auto;">
-            </div>
+          <div ng-carousel ng-carousel-name="TeslaCarousel" ng-carousel-timer="5000">
+            <slidecontainer class="carousel-slides">
+              <slide ng-repeat="image in vm.imagesTesla">
+                <img ng-src="{{image.image}}" style="margin:auto;">
+              </slide>
+            </slidecontainer>
           </div>
         </div>
       </div>
@@ -133,11 +143,12 @@
           in der Vakuum herrscht wird eine Kapsel auf ca. 1200km/h beschleunigt. Somit können Langstrecken schneller als
           mit dem Flugzeug oder dem Zug zurückgelegt werden.</p>
         <div class="mediaContainer">
-
-          <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html">
-            <div uib-slide ng-repeat="image in vm.Images_hyperloop track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
-              <img ng-src="{{image.image}}" style="margin:auto;">
-            </div>
+          <div ng-carousel ng-carousel-name="HyperloopCarousel" ng-carousel-timer="5000">
+            <slidecontainer class="carousel-slides">
+              <slide ng-repeat="image in vm.imagesHyperloop">
+                <img ng-src="{{image.image}}" style="margin:auto;">
+              </slide>
+            </slidecontainer>
           </div>
         </div>
       </div>
@@ -145,14 +156,17 @@
       <div class="contentBlock" ng-if="vm.contentDivs[5]">
         <h2>2017: The Boring Company</h2>
         <p class="textContainer">The Boring Company soll ein Unternehmen werden, dass den Verkehr in Großstädten regelt. Dazu wolle er eine Tunnelbohrmaschine
-          bauen.</p>
+          bauen.
+        </p>
         <div class="mediaContainer">
-
-          <div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides" template-url="node_modules/angular-ui-bootstrap/template/carousel/carousel.html">
-            <div uib-slide ng-repeat="image in vm.Images_theboringcompany track by image.id" index="image.id" template-url="node_modules/angular-ui-bootstrap/template/carousel/slide.html">
-              <img ng-src="{{image.image}}" style="margin:auto;">
-            </div>
+          <div ng-carousel ng-carousel-name="BoringCarousel" ng-carousel-timer="5000">
+            <slidecontainer class="carousel-slides">
+              <slide ng-repeat="image in vm.imagesTheboringcompany">
+                <img ng-src="{{image.image}}" style="margin:auto;">
+              </slide>
+            </slidecontainer>
           </div>
+
         </div>
       </div>
 

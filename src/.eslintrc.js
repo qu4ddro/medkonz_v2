@@ -7,6 +7,8 @@ module.exports = {
     'object-curly-spacing': "off",
     'brace-style' : 'off',
     'no-unused-vars' : 'off',
-    'linebreak-style' : 'off'
+    'linebreak-style' : 'off',
+    'quotes' : 'off',
+    'max-params': 'off'
   }
 }

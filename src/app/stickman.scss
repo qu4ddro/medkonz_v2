@@ -1,3 +1,7 @@
+$animationTime: 0.5s;
+$stickmanColor: #eeeeee;
+$bodyPartyWidth: 0.25em;
+
 .stickman {
     height: 5em;
     width: 5em;
@@ -5,7 +9,7 @@
     top: 87%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: 1s walk-body infinite;
+    animation: $animationTime walk-body infinite;
 
     .head {
       height: 4em;
@@ -13,47 +17,64 @@
       position: absolute;
       top: -0.7em;
       left: 22.6%;
-      background-color: #111;
-      border-radius: 100%;
       z-index: 5;
+
+      img {
+        -moz-transform: scaleX(-1) translate(20%,0);
+        -o-transform: scaleX(-1) translate(20%,0);
+        -webkit-transform: scaleX(-1) translate(20%,0);
+        transform: scaleX(-1) translate(20%,0);
+      }
+
+      .flipped {
+        -moz-transform: scaleX(1) translate(0,0);
+        -o-transform: scaleX(1) translate(0,0);
+        -webkit-transform: scaleX(1) translate(0,0);
+        transform: scaleX(1) translate(0,0);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+      }
     }
 
     .body {
         height: 3em;
-        width: 0.45em;
+        width: $bodyPartyWidth;
         position: absolute;
         top: 5em;
         left: 50%;
         margin-left: -0.3125em;
-        background-color: #6e6e6e;
+        background-color: $stickmanColor;
+        border-radius: 25%;
 
         .arm {
           height: 2em;
-          width: 0.425em;
+          width: $bodyPartyWidth;
           position: absolute;
           top: 0;
           transform: rotate(-45deg);
           transform-origin: top;
-          background-color: #6e6e6e;
-          animation: 1s walk-arm infinite;
+          background-color: $stickmanColor;
+          animation: $animationTime walk-arm infinite;
+          border-radius: 25%;
         }
         .arm#left {
-            animation-delay: 0.5s;
-            background-color: #6e6e6e;
+            animation-delay: $animationTime/2;
+            background-color: $stickmanColor;
         }
         .leg {
-          height: 1.5em;
-          width: 0.425em;
+          height: 2em;
+          width: $bodyPartyWidth;
           position: absolute;
-          bottom: -1.36667em;
+          bottom: -2em;
           transform: rotate(-90deg);
           transform-origin: top;
-          background-color: #6e6e6e;
-          animation: 1s walk-leg infinite;
+          background-color: $stickmanColor;
+          animation: $animationTime walk-leg infinite;
+          border-radius: 25%;
         }
         .leg#right {
-          background-color: #6e6e6e;
-          animation-delay: 0.5s;
+          background-color: $stickmanColor;
+          animation-delay: $animationTime/2;
         }
     }
 }
@@ -69,6 +90,12 @@
     -moz-animation-play-state:running !important;
     -o-animation-play-state:running !important;
     animation-play-state:running !important;
+}
+
+.wobble {
+-webkit-animation: wobble 0.5s infinite;
+animation: wobble 0.5s infinite;
+transform-origin: 50% 100%;
 }
 
 @keyframes walk-body {
@@ -131,4 +158,16 @@
     100% {
         transform: rotate(85deg);
     }
+}
+$wobble_degrees : 5deg;
+
+@-webkit-keyframes wobble {
+0% { -webkit-transform: rotate($wobble_degrees); }
+50% { -webkit-transform: rotate(-1*$wobble_degrees); }
+100% { -webkit-transform: rotate($wobble_degrees); }
+}
+ @keyframes wobble {
+0% { transform: rotate($wobble_degrees); }
+50% { transform: rotate(-1*$wobble_degrees); }
+100% { transform: rotate($wobble_degrees); }
 }

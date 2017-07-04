@@ -1,69 +1,79 @@
 (function () {
-  angular.module('app', ['ngTouch', 'smoothScroll'])
-    .controller('MyappController', function ($timeout, $document, $window, smoothScroll, $log) {
+  angular.module('myapp', [
+    'ngAnimate',
+    'smoothScroll',
+    'angular-carousel'
+  ])
+    .controller('MyAppController', function ($timeout, $document, $window, $log, smoothScroll) {
       var vm = this;
-      vm.ShowDiv = showdiv;
-      vm.$onInit = init();
-      vm.contentDivs = [false, false, false, false, false];
-      vm.DivPosition = ['div2', 'div3', 'div4', 'div5'];
-      vm.contentDivsClass = ['fa-circle-o', 'fa-circle-o', 'fa-circle-o', 'fa-circle-o', 'fa-circle-o'];
-      vm.contentDivsConnector = [];
-      vm.Comments = [false, false, false, false, false, false, false, false];
-      vm.imagesPersonal = [
-        { image: 'assets/images/1_Persönlich/Elon-Musk.jpg', id: 0 },
-        { image: 'assets/images/1_Persönlich/Elon-Musk1.jpeg', id: 1 }
-      ];
-      vm.imagesPaypal = [
-        { image: 'assets/images/3_PayPal/smartphone1.jpg', id: 0 },
-        { image: 'assets/images/3_PayPal/smartphone2.png', id: 1 },
-        { image: 'assets/images/3_PayPal/whatispaypal.png', id: 2 },
-        { image: 'assets/images/3_PayPal/paypal-working-functioning.png', id: 3 },
-        { image: 'assets/images/3_PayPal/flowChart1.png', id: 4 },
-        { image: 'assets/images/3_PayPal/flowChart2.png', id: 5 }
-      ];
-      vm.imagesTesla = [
-        { image: 'assets/images/4_Tesla/Models/chassis-motor-p90d.jpg', id: 0 },
-        { image: 'assets/images/4_Tesla/Model X/section-exterior-primary.jpg', id: 1 },
-        { image: 'assets/images/4_Tesla/Model X/section-hero-background.jpg', id: 2 }
-      ];
-      vm.imagesSpacex = [
-        { image: 'assets/images/5_SpaceX/falcon9-render.png', id: 0 },
-        { image: 'assets/images/5_SpaceX/falcon-heavy-render.png', id: 1 },
-        { image: 'assets/images/5_SpaceX/landing.jpg', id: 2 },
-        { image: 'assets/images/5_SpaceX/launch.jpg', id: 3 },
-        { image: 'assets/images/5_SpaceX/ses10_launch3.jpg', id: 4 }
-      ];
-      vm.imagesHyperloop = [
-        { image: 'assets/images/6_Hyperloop/hyperloop-transportation.jpg', id: 0 },
-        { image: 'assets/images/6_Hyperloop/Hyperloop_all_cutaway.png', id: 1 },
-        { image: 'assets/images/6_Hyperloop/hyperloopconcept.jpg', id: 2 },
-        { image: 'assets/images/6_Hyperloop/image_desert.jpg', id: 3 },
-        { image: 'assets/images/6_Hyperloop/the_hyperloop.png', id: 4 }
-      ];
-      vm.imagesTheboringcompany = [
-        { image: 'assets/images/7_The Boring Company/tunnel-boring-company-borer.jpg', id: 0 }
-      ];
-      vm.myInterval = 5000;
-      vm.noWrapSlides = false;
-      vm.active = 0;
-      vm.Move = moveOnArrow;
-      vm.EndMove = endmove;
-      vm.StickPos = [0, 0]; // x,y
+      angular.extend(vm, vm, {
+        ShowDiv: showdiv,
+        $onInit: init(),
+        myInterval: 5000,
+        noWrapSlides: false,
+        active: 0,
+        Move: moveOnArrow,
+        EndMove: endmove,
+        ScrollTo: scrollTo,
+        TimelinePointPositions: null,
+        Stick: null,
+        StickmanIsFlipped: false,
+        ScrollIndex: 0,
+        ScrollUp: 0,
+        IsMoving: true,
+        contentDivs: [false, false, false, false, false],
+        DivPosition: ["div2", "div3", "div4", "div5"],
+        contentDivsClass: ["fa-circle-o", "fa-circle-o", "fa-circle-o", "fa-circle-o", "fa-circle-o"],
+        contentDivsConnector: [],
+        Comments: [false, false, false, false, false, false, false, false],
+        StickPos: [0, 0], // x,y
+        ScrollIndexPosXY: [[-100,-500],[-450,250],[50,-20]],
+
+        imagesPersonal: [
+          { image: 'assets/images/1_Persönlich/Elon-Musk.jpg', id: 0 },
+          { image: 'assets/images/1_Persönlich/Elon-Musk1.jpeg', id: 1 }
+        ],
+        imagesPaypal: [
+          { image: 'assets/images/3_PayPal/smartphone1.jpg', id: 0 },
+          { image: 'assets/images/3_PayPal/smartphone2.png', id: 1 },
+          { image: 'assets/images/3_PayPal/whatispaypal.png', id: 2 },
+          { image: 'assets/images/3_PayPal/paypal-working-functioning.png', id: 3 },
+          { image: 'assets/images/3_PayPal/flowChart1.png', id: 4 },
+          { image: 'assets/images/3_PayPal/flowChart2.png', id: 5 }
+        ],
+        imagesTesla: [
+          { image: 'assets/images/4_Tesla/Models/chassis-motor-p90d.jpg', id: 0 },
+          { image: 'assets/images/4_Tesla/Model X/section-exterior-primary.jpg', id: 1 },
+          { image: 'assets/images/4_Tesla/Model X/section-hero-background.jpg', id: 2 }
+        ],
+        imagesSpacex: [
+          { image: 'assets/images/5_SpaceX/falcon9-render.png', id: 0 },
+          { image: 'assets/images/5_SpaceX/falcon-heavy-render.png', id: 1 },
+          { image: 'assets/images/5_SpaceX/landing.jpg', id: 2 },
+          { image: 'assets/images/5_SpaceX/launch.jpg', id: 3 },
+          { image: 'assets/images/5_SpaceX/ses10_launch3.jpg', id: 4 }
+        ],
+        imagesHyperloop: [
+          { image: 'assets/images/6_Hyperloop/hyperloop-transportation.jpg', id: 0 },
+          { image: 'assets/images/6_Hyperloop/Hyperloop_all_cutaway.png', id: 1 },
+          { image: 'assets/images/6_Hyperloop/hyperloopconcept.jpg', id: 2 },
+          { image: 'assets/images/6_Hyperloop/image_desert.jpg', id: 3 },
+          { image: 'assets/images/6_Hyperloop/the_hyperloop.png', id: 4 }
+        ],
+        imagesTheboringcompany: [
+          { image: 'assets/images/7_The Boring Company/tunnel-boring-company-borer.jpg', id: 0 }
+        ]
+      });
       vm.Viewport = [$document[0].getElementById('main').clientWidth, $document[0].getElementById('main').clientHeight];
       vm.InitHeigth = vm.Viewport[1];
       vm.ScrollTo = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
-      vm.ScrollIndex = 1;
-      vm.ScrollUp = 0;
-      vm.IsMoving = null;
       vm.TimelineYPosition = (vm.Viewport[1] * 20 / 100);
-      vm.TimelinePointPositions = null;
-      vm.Stick = null;
 
       function init() {
         startQuotes(3000);
         vm.IsMoving = true;
         vm.stick = $document[0].getElementById('stickman');
-        TweenLite.from(vm.stick, 4, { left: -500 });
+        TweenLite.from(vm.stick, 2, { left: -500, onComplete: endmove() });
         $timeout(function () {
           vm.TimelinePointPositions = [
             { x: $document[0].getElementById('timelinePoint0').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint0').getBoundingClientRect().top },
@@ -75,7 +85,12 @@
           showdiv(1);
         }, 1);
       }
-
+      $window.addEventListener("keydown", function (e) {
+        // space and arrow keys
+        if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+          e.preventDefault();
+        }
+      }, false);
       function moveOnArrow(event) {
         var stick = $document[0].getElementById('stickman');
         var posX = vm.StickPos[0];
@@ -87,93 +102,108 @@
             posY += 10;
           }
           else if (event.key === 'ArrowDown' && event.key === 'ArrowLeft') {
-            vm.StickPos[0] += 10;
-            vm.StickPos[1] -= 10;
+            posX += 10;
+            posY -= 10;
           }
           else if (event.key === 'ArrowUp' && event.key === 'ArrowRight') {
-            vm.StickPos[0] -= 10;
-            vm.StickPos[1] += 10;
+            posX -= 10;
+            posY += 10;
           }
           else if (event.key === 'ArrowUp' && event.key === 'ArrowLeft') {
-            vm.StickPos[0] -= 10;
-            vm.StickPos[1] -= 10;
+            posX -= 10;
+            posY -= 10;
           }
           else if (event.key === 'ArrowDown') {
-            vm.StickPos[1] += 10;
+            posY += 10;
           }
           else if (event.key === 'ArrowUp') {
-            vm.StickPos[1] -= 10;
+            posY -= 10;
           }
           else if (event.key === 'ArrowRight') {
-            vm.StickPos[0] += 10;
+            posX += 10;
           }
           else if (event.key === 'ArrowLeft') {
-            vm.StickPos[0] -= 10;
+            posX -= 10;
           }
-          move(stick, vm.StickPos[0], vm.StickPos[1], moveTime);
+          move(stick, posX, posY, moveTime);
+          collissionDetection();
+          // $log.log("StickPos: " + vm.StickPos + "Viewport: " + vm.Viewport);
         }
       }
-
       function move(item, posX, posY, time) {
-        // $log.log('posX: ' + posX + 'posY: ' + posY + 'time: ' + time);
+        // ($log.log('posX: ' + posX + 'posY: ' + posY + 'time: ' + time);
         vm.IsMoving = true;
-        TweenLite.to(item, time, { x: posX, y: posY, onComplete: collissionDetection() });
-      }
-
-      function endmove(event) {
-        if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-          vm.IsMoving = false;
-        }
-      }
-      function collissionDetection() {
-        var StickTop = vm.stick.getBoundingClientRect().top;
-        var StickLeft = vm.stick.getBoundingClientRect().left;
-        if (StickTop > (vm.Viewport[1])) {
-          $log.log(smoothScroll(vm.ScrollTo[vm.ScrollIndex]) + " :::: " + vm.ScrollTo);
-          smoothScroll(vm.ScrollTo[vm.ScrollIndex]);
-          vm.ScrollIndex += 1 % 2;
-          vm.Viewport[1] += vm.InitHeigth;
+        if (posX < vm.StickPos[0]) {
+          vm.StickmanIsFlipped = true;
         }
         else {
-          switch (vm.ScrollIndex) {
-            case 1:
-              break;
-            case 2:
-              if (StickTop < vm.InitHeigth) {
-                smoothScroll(vm.ScrollTo[vm.ScrollIndex - 2]);
-                vm.ScrollIndex -= 1 % 2;
-                vm.Viewport[1] -= vm.InitHeigth;
-              }
-              break;
-            case 3:
-              if (StickTop < (vm.InitHeigth * 2)) {
-                smoothScroll(vm.ScrollTo[vm.ScrollIndex - 2]);
-                vm.ScrollIndex -= 1 % 2;
-                vm.Viewport[1] -= vm.InitHeigth;
-              }
-              break;
-            default: {
-              $log.log('something went wrong');
-            }
+          vm.StickmanIsFlipped = false;
+        }
+        TweenLite.to(item, time, { x: posX, y: posY});
+        vm.StickPos = [posX, posY];
+      }
+      function collissionDetection() {
+        var StickBottom = vm.stick.getBoundingClientRect().bottom + 60;
+        // var StickCenter = (vm.stick.getBoundingClientRect().right - vm.stick.getBoundingClientRect().left) / 2 + vm.stick.getBoundingClientRect().left;
+        var StickCenter = vm.stick.getBoundingClientRect().left;
+        // $log.log("StickBottom: " + StickBottom + "   StickCenter: " + StickCenter + "   Viewport: " + vm.Viewport);
+        var target;
 
+        // Check if botttom of Page is reached
+        if (StickBottom >= (vm.Viewport[1])) {
+          if (vm.ScrollIndex[vm.ScrollIndex + 1] !== null) {
+            vm.ScrollIndex += 1;
+            target = vm.ScrollTo[vm.ScrollIndex];
+            var posXY = vm.ScrollIndexPosXY[vm.ScrollIndex];
+            move(vm.stick, posXY[0], posXY[1], 2);
+            scrollTo(target);
           }
         }
+        else if (StickBottom <= 0) {
+          if (vm.ScrollIndex[vm.ScrollIndex - 1] !== null) {
+            vm.ScrollIndex -= 1;
+            target = vm.ScrollTo[vm.ScrollIndex];
+            move(vm.stick, posXY[0], posXY[1], 2);
+            scrollTo(target);
+          }
+        }
+/*        switch (vm.ScrollIndex) {
+          case 1: {
+            posXY = [0, 0];
+            break;
+          }
+          case 2: {
+            posXY = [-100, 200];
+            break;
+          }
+          case 3: {
+            posXY = [,];
+            break;
+          }
+          default: {
+            $log.log('something went wrong');
+          }
 
-        if (StickTop < vm.TimelinePointPositions[0].y + 150 && StickTop > vm.TimelinePointPositions[0].y - 150) {
+        }
+        */
+
+        // Check if Timeline Point is reached
+        if (StickBottom < vm.TimelinePointPositions[0].y + 150 && StickBottom > vm.TimelinePointPositions[0].y - 150) {
           for (var i = 0; i < vm.TimelinePointPositions.length; i++) {
-            if (StickLeft < vm.TimelinePointPositions[i].x + 50 && StickLeft > vm.TimelinePointPositions[i].x - 50) {
+            if (StickCenter < vm.TimelinePointPositions[i].x + 50 && StickCenter > vm.TimelinePointPositions[i].x - 50) {
               showdiv(i);
             }
           }
         }
       }
 
-      $window.addEventListener('keydown', function (e) {
-        // space and arrow keys
-        if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-          e.preventDefault();
-        }
-      }, false);
+      function scrollTo(target) {
+        // $log.log(target);
+        smoothScroll(target);
+      }
+      function endmove(event) {
+        vm.IsMoving = false;
+      }
       function startQuotes(timer) {
         $timeout(function () {
           var rnd = Math.floor(Math.random() * vm.Comments.length);
@@ -186,13 +216,13 @@
       }
       function showdiv(number) {
         setTimeline(number);
-        setAllcontentDivsFalse();
+        setAllContentDivsFalse();
         vm.contentDivs[number] = true;
       }
       function resetTimeline() {
-        setAllcontentDivsFalse();
-        setAllcontentDivsClassFalse();
-        setAllcontentDivsConnectorBlack();
+        setAllContentDivsFalse();
+        setAllContentDivsClassFalse();
+        setAllContentDivsConnectorBlack();
       }
       function setTimeline(newStatus) {
         var lastDiv = getTimelineStatus();
@@ -201,14 +231,14 @@
         }
         else if (newStatus >= lastDiv) {
           for (var i = 0; i <= newStatus; i++) {
-            vm.contentDivsClass[i] = 'fa-circle timeline-reached';
-            vm.contentDivsConnector[i - 1] = 'timeline-reached-connector';
+            vm.contentDivsClass[i] = "fa-circle timeline-reached";
+            vm.contentDivsConnector[i - 1] = "timeline-reached-connector";
           }
         }
         else if (newStatus < lastDiv) {
           for (var diff = lastDiv - newStatus; diff > 0; diff--) {
-            vm.contentDivsClass[lastDiv] = 'fa-circle-o';
-            vm.contentDivsConnector[lastDiv - 1] = 'timeline-not-reached-connector';
+            vm.contentDivsClass[lastDiv] = "fa-circle-o";
+            vm.contentDivsConnector[lastDiv - 1] = "timeline-not-reached-connector";
             lastDiv--;
           }
         }
@@ -225,19 +255,19 @@
         }
         return lastTrueDiv;
       }
-      function setAllcontentDivsFalse() {
+      function setAllContentDivsFalse() {
         for (var i = 0; i < vm.contentDivs.length; i++) {
           vm.contentDivs[i] = false;
         }
       }
-      function setAllcontentDivsClassFalse() {
+      function setAllContentDivsClassFalse() {
         for (var i = 0; i < vm.contentDivsClass.length; i++) {
-          vm.contentDivsClass[i] = 'fa-circle-o';
+          vm.contentDivsClass[i] = "fa-circle-o";
         }
       }
-      function setAllcontentDivsConnectorBlack() {
+      function setAllContentDivsConnectorBlack() {
         for (var i = 0; i < vm.contentDivsConnector.length; i++) {
-          vm.contentDivsConnector[i] = 'timeline-not-reached-connector';
+          vm.contentDivsConnector[i] = "timeline-not-reached-connector";
         }
       }
     });

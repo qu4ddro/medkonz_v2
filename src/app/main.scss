@@ -24,10 +24,16 @@ body{
     background-color: #151515  ;
     height:100%;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 main {
     text-align: center;
     position: relative;
-    overflow: hidden;
+    //overflow-x: hidden;
+    //overflow-y: auto;
     height: 100vh;
     font-family: "Open Sans";
     color: #e2e2e2;
