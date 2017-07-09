@@ -92,6 +92,13 @@
         }
       }, false);
 
+      function getPos(item) {
+        var CenterY = (item.getBoundingClientRect().bottom - item.getBoundingClientRect().top) / 2 + item.getBoundingClientRect().top;
+        var CenterX = (item.getBoundingClientRect().right - item.getBoundingClientRect().left) / 2 + item.getBoundingClientRect().left;
+        var position = [CenterX, CenterY];
+        return position;
+      }
+
       function moveOnArrow(event) {
         var stick = $document[0].getElementById('stickman');
         var posX = vm.StickPos[0];
@@ -126,16 +133,8 @@
           else if (event.key === 'ArrowLeft') {
             posX -= 10;
           }
-          var TweenlightViewport = [vm.Viewport[0] / 2, vm.Viewport[1] / 2];
-          $log.log(posX+""+posY);
-          if (posX > (-1 * TweenlightViewport[0]) && (posX < (TweenlightViewport[0] - 70))) {
-            $log.log("x in bounds");
-            if ((posY > (-1 * TweenlightViewport[1])) && (posY < (TweenlightViewport[1]))) {
-              $log.log("y in bounds");
-              move(stick, posX, posY, moveTime);
-              collissionDetection();
-            }
-          }
+          move(stick, posX, posY, moveTime);
+          collissionDetection();
         }
       }
 
@@ -148,9 +147,11 @@
         else {
           vm.StickmanIsFlipped = false;
         }
-
-        TweenLite.to(item, time, { x: posX, y: posY });
-        vm.StickPos = [posX, posY];
+        var TweenlightViewport = [vm.Viewport[0]/2,vm.Viewport[1]/2]
+        if (posX > (-1*TweenlightViewport[0]) && ( posX < (TweenlightViewport[0])) )  {
+          TweenLite.to(item, time, { x: posX, y: posY });
+          vm.StickPos = [posX, posY];
+        }
       }
 
       function collissionDetection() {
