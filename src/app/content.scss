@@ -24,3 +24,37 @@ video {
   left:0;
   opacity: 0.5;
 }
+
+.image-left{
+  float: left;
+  width: 30vw;
+  margin-left:2.5vw;
+  margin-right: 2.5vw;
+}
+
+.image-right{
+  float: right;
+  width: 30vw;
+  margin-left:2.5vw;
+  margin-right: 2.5vw;
+}
+
+.textContainer-right{
+    text-align: left;
+
+}
+
+.textContainer-left {
+    text-align: left;
+    margin-left: 2.5vw;
+}
+
+.container-paypal{
+  margin-top: 10vh;
+}
+
+.clear-left{
+ clear: left;
+}
+
+
