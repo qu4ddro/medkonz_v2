@@ -2,7 +2,7 @@
   angular.module('myapp', [
     'ngAnimate',
     'smoothScroll',
-    'angular-carousel'
+    'angular-carousel',
   ])
     .controller('MyAppController', function ($timeout, $document, $window, $log, smoothScroll, Carousel) {
       var vm = this;
@@ -19,7 +19,6 @@
         Stick: null,
         StickmanIsFlipped: false,
         ScrollIndex: 0,
-        ScrollUp: 0,
         IsMoving: true,
         contentDivs: [false, false, false, false, false],
         DivPosition: ["div2", "div3", "div4", "div5"],
@@ -27,6 +26,7 @@
         contentDivsConnector: [],
         Comments: [false, false, false, false, false, false, false, false],
         StickPos: [0, 0], // x,y
+        scrolling: false,
 
         imagesPersonal: [
           { image: 'assets/images/1_Persönlich/Elon-Musk.jpg', id: 0 },
@@ -66,7 +66,7 @@
       vm.Viewport = [$document[0].getElementById('main').clientWidth, $document[0].getElementById('main').clientHeight];
       vm.InitHeigth = vm.Viewport[1];
       vm.scrollTargets = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
-      vm.ScrollIndexPosXY = [[-100, 0], [0, 0], [0, 0]];
+      vm.ScrollIndexPosXY = [[0, 0], [0, 0], [0, 0]];
       vm.TimelineYPosition = (vm.Viewport[1] * 20 / 100);
 
       function init() {
@@ -126,13 +126,21 @@
           else if (event.key === 'ArrowLeft') {
             posX -= 10;
           }
-          move(stick, posX, posY, moveTime);
-          collissionDetection();
-          // $log.log("StickPos: " + vm.StickPos + "Viewport: " + vm.Viewport);
+          var TweenlightViewport = [vm.Viewport[0] / 2, vm.Viewport[1] / 2];
+          $log.log(posX+""+posY);
+          if (posX > (-1 * TweenlightViewport[0]) && (posX < (TweenlightViewport[0] - 70))) {
+            $log.log("x in bounds");
+            if ((posY > (-1 * TweenlightViewport[1])) && (posY < (TweenlightViewport[1]))) {
+              $log.log("y in bounds");
+              move(stick, posX, posY, moveTime);
+              collissionDetection();
+            }
+          }
         }
       }
+
+      // Where Elon moves
       function move(item, posX, posY, time) {
-        // ($log.log('posX: ' + posX + 'posY: ' + posY + 'time: ' + time);
         vm.IsMoving = true;
         if (posX < vm.StickPos[0]) {
           vm.StickmanIsFlipped = true;
@@ -140,14 +148,17 @@
         else {
           vm.StickmanIsFlipped = false;
         }
+
         TweenLite.to(item, time, { x: posX, y: posY });
         vm.StickPos = [posX, posY];
       }
+
       function collissionDetection() {
+        if (vm.scrolling) {
+          return;
+        }
         var StickBottom = vm.stick.getBoundingClientRect().bottom + 60;
-        // var StickCenter = (vm.stick.getBoundingClientRect().right - vm.stick.getBoundingClientRect().left) / 2 + vm.stick.getBoundingClientRect().left;
-        var StickCenter = vm.stick.getBoundingClientRect().left;
-        //$log.log("StickBottom: " + StickBottom + "   StickCenter: " + StickCenter + "   Viewport: " + vm.Viewport[1]);
+        var StickCenter = ((vm.stick.getBoundingClientRect().right - vm.stick.getBoundingClientRect().left) / 2 + vm.stick.getBoundingClientRect().left);
         var target;
 
         // Check if Elon runs out of bounds
@@ -166,8 +177,7 @@
             }
           }
           target = vm.scrollTargets[vm.ScrollIndex];
-          var posXY = [vm.ScrollIndexPosXY[vm.ScrollIndex][0],(vm.ScrollIndexPosXY[vm.ScrollIndex][1]) + (vm.Viewport[1] * (vm.ScrollIndex))];
-          //$log.log("posXY: " + posXY + "| scrollindex: " + (vm.ScrollIndex + 1) + "| scrollindex: " + vm.ScrollIndexPosXY[vm.ScrollIndex]);
+          var posXY = [vm.ScrollIndexPosXY[vm.ScrollIndex][0], (vm.ScrollIndexPosXY[vm.ScrollIndex][1]) + (vm.Viewport[1] * (vm.ScrollIndex))];
           move(vm.stick, posXY[0], posXY[1], 2);
           scrollTo(target);
         }
@@ -183,8 +193,23 @@
       }
 
       function scrollTo(target) {
-        $log.log(target);
-        smoothScroll(target);
+        var options = {
+          duration: 700,
+          easing: 'easeInQuad',
+          offset: 0,
+          callbackBefore: function (element) {
+            vm.scrolling = true;
+            $log.log('about to scroll to element', element);
+            vm.IsMoving = true;
+          },
+          callbackAfter: function (element) {
+            vm.scrolling = false;
+            vm.IsMoving = false;
+            $log.log('scrolled to element', element);
+          },
+          containerId: 'custom-container-id'
+        }
+        smoothScroll(target, options);
       }
       function endmove(event) {
         vm.IsMoving = false;
