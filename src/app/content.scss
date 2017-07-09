@@ -1,0 +1,26 @@
+.contentBlock {
+    clear: both;
+    position: relative;
+    top: 30vh;
+}
+
+.textContainer {
+    max-width: 40vw;
+    text-align: right;
+    float: left;
+    margin: 2.5vw;
+}
+
+.mediaContainer {
+    width: 40vw;
+    height: 30vh;
+    float: right;
+    margin: 2.5vw;
+}
+
+video {
+  width: 100vw;
+  position: absolute;
+  left:0;
+  opacity: 0.5;
+}

@@ -10,6 +10,8 @@ $bodyPartyWidth: 0.25em;
     left: 50%;
     transform: translate(-50%, -50%);
     animation: $animationTime walk-body infinite;
+    z-index: 50;
+
 
     .head {
       height: 4em;
@@ -17,7 +19,7 @@ $bodyPartyWidth: 0.25em;
       position: absolute;
       top: -0.7em;
       left: 22.6%;
-      z-index: 5;
+      z-index: 50;
 
       img {
         -moz-transform: scaleX(-1) translate(20%,0);

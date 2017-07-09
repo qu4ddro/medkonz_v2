@@ -7,7 +7,7 @@
     display: table;
     width: 800px;
     margin: auto;
-    z-index: 700;
+    z-index: 5;
 }
 .timeline-circles-not-first{
     position: relative;
@@ -83,28 +83,7 @@ span{
     opacity: 0;
 }
 
-
-
 #timeline-container {
     position: relative;
     top: 20vh;
-}
-
-.contentBlock {
-    clear: both;
-    position: relative;
-    top: 30vh;
-}
-.textContainer {
-    max-width: 40vw;
-    text-align: right;
-    float: left;
-    margin: 2.5vw;
-}
-
-.mediaContainer {
-    width: 40vw;
-    height: 30vh;
-    float: right;
-    margin: 2.5vw;
 }

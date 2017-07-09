@@ -4,7 +4,7 @@
     'smoothScroll',
     'angular-carousel'
   ])
-    .controller('MyAppController', function ($timeout, $document, $window, $log, smoothScroll) {
+    .controller('MyAppController', function ($timeout, $document, $window, $log, smoothScroll, Carousel) {
       var vm = this;
       angular.extend(vm, vm, {
         ShowDiv: showdiv,
@@ -14,7 +14,7 @@
         active: 0,
         Move: moveOnArrow,
         EndMove: endmove,
-        ScrollTo: scrollTo,
+        scrollTo: scrollTo,
         TimelinePointPositions: null,
         Stick: null,
         StickmanIsFlipped: false,
@@ -27,7 +27,6 @@
         contentDivsConnector: [],
         Comments: [false, false, false, false, false, false, false, false],
         StickPos: [0, 0], // x,y
-        ScrollIndexPosXY: [[-100,-500],[-450,250],[50,-20]],
 
         imagesPersonal: [
           { image: 'assets/images/1_Persönlich/Elon-Musk.jpg', id: 0 },
@@ -66,7 +65,8 @@
       });
       vm.Viewport = [$document[0].getElementById('main').clientWidth, $document[0].getElementById('main').clientHeight];
       vm.InitHeigth = vm.Viewport[1];
-      vm.ScrollTo = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
+      vm.scrollTargets = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
+      vm.ScrollIndexPosXY = [[-100, -500], [-450, 350], [0, 0]];
       vm.TimelineYPosition = (vm.Viewport[1] * 20 / 100);
 
       function init() {
@@ -82,7 +82,7 @@
             { x: $document[0].getElementById('timelinePoint3').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint3').getBoundingClientRect().top },
             { x: $document[0].getElementById('timelinePoint4').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint4').getBoundingClientRect().top }
           ];
-          showdiv(1);
+          showdiv(0);
         }, 1);
       }
       $window.addEventListener("keydown", function (e) {
@@ -139,53 +139,58 @@
         else {
           vm.StickmanIsFlipped = false;
         }
-        TweenLite.to(item, time, { x: posX, y: posY});
+        TweenLite.to(item, time, { x: posX, y: posY });
         vm.StickPos = [posX, posY];
       }
       function collissionDetection() {
         var StickBottom = vm.stick.getBoundingClientRect().bottom + 60;
         // var StickCenter = (vm.stick.getBoundingClientRect().right - vm.stick.getBoundingClientRect().left) / 2 + vm.stick.getBoundingClientRect().left;
         var StickCenter = vm.stick.getBoundingClientRect().left;
-        // $log.log("StickBottom: " + StickBottom + "   StickCenter: " + StickCenter + "   Viewport: " + vm.Viewport);
+        $log.log("StickBottom: " + StickBottom + "   StickCenter: " + StickCenter + "   Viewport: " + vm.Viewport[1]);
         var target;
 
         // Check if botttom of Page is reached
         if (StickBottom >= (vm.Viewport[1])) {
           if (vm.ScrollIndex[vm.ScrollIndex + 1] !== null) {
             vm.ScrollIndex += 1;
-            target = vm.ScrollTo[vm.ScrollIndex];
-            var posXY = vm.ScrollIndexPosXY[vm.ScrollIndex];
+            target = vm.scrollTargets[vm.ScrollIndex];
+            var posXY = (vm.ScrollIndex+1)*vm.ScrollIndexPosXY[vm.ScrollIndex];
+            $log.log(posXY+"scrollindex: "+ (vm.ScrollIndex+1) +"indexposXY: "+ vm.ScrollIndexPosXY[vm.ScrollIndex]);
+
             move(vm.stick, posXY[0], posXY[1], 2);
             scrollTo(target);
           }
         }
-        else if (StickBottom <= 0) {
+
+        // Check if top of Page is reached
+        else if (StickBottom <= 30) {
           if (vm.ScrollIndex[vm.ScrollIndex - 1] !== null) {
             vm.ScrollIndex -= 1;
-            target = vm.ScrollTo[vm.ScrollIndex];
+            target = vm.scrollTargets[vm.ScrollIndex];
+            $log.log(posXY);
             move(vm.stick, posXY[0], posXY[1], 2);
             scrollTo(target);
           }
         }
-/*        switch (vm.ScrollIndex) {
-          case 1: {
-            posXY = [0, 0];
-            break;
-          }
-          case 2: {
-            posXY = [-100, 200];
-            break;
-          }
-          case 3: {
-            posXY = [,];
-            break;
-          }
-          default: {
-            $log.log('something went wrong');
-          }
+        /*        switch (vm.ScrollIndex) {
+                  case 1: {
+                    posXY = [0, 0];
+                    break;
+                  }
+                  case 2: {
+                    posXY = [-100, 200];
+                    break;
+                  }
+                  case 3: {
+                    posXY = [,];
+                    break;
+                  }
+                  default: {
+                    $log.log('something went wrong');
+                  }
 
-        }
-        */
+                }
+                */
 
         // Check if Timeline Point is reached
         if (StickBottom < vm.TimelinePointPositions[0].y + 150 && StickBottom > vm.TimelinePointPositions[0].y - 150) {
@@ -198,7 +203,7 @@
       }
 
       function scrollTo(target) {
-        // $log.log(target);
+        $log.log(target);
         smoothScroll(target);
       }
       function endmove(event) {

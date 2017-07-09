@@ -21,6 +21,7 @@
 <body ng-app="myapp" ng-controller="MyAppController as vm" ng-keydown="vm.Move($event)" ng-keyup="vm.EndMove($event)">
 
   <main id="main">
+
     <nav>
       <ul>
         <li><a href="#" ng-click="scrollTo('landing')">landing</a></li>
@@ -68,6 +69,8 @@
         </div>
       </div>
 
+      <div>
+
       <div class="contentBlock" ng-if="vm.contentDivs[0]">
         <h2>1995: Zip2</h2>
         <p class="textContainer">Erste Firma die Elon Musk mit seinem Bruder Kimbal gründete. Größtes Produkt stellte ein Online-Dienst für Zeitungen
@@ -86,6 +89,7 @@
       </div>
 
       <div class="contentBlock" ng-if="vm.contentDivs[1]">
+        <video src="assets/videos/3_paypal_Intro.mp4" autoplay muted loop></video>
         <h2>1999: X.com / Paypal</h2>
         <p class="textContainer">X.com ist ein Onlinebezahlsystem via E-Mail-Addresse und wurde von Elon Musk gegründet. Im Jahr 2000 fusionierte
           X.com mit dem Unternehmen Confinity, dass auf ein Produkt names PayPal spezialisiert war. Musk war größter Anteilseigner(11,7%).</p>
@@ -169,7 +173,6 @@
 
         </div>
       </div>
-
     </section>
 
     <section id="closing" class="wholePage">
