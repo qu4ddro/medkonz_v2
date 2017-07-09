@@ -14,7 +14,7 @@
         active: 0,
         Move: moveOnArrow,
         EndMove: endmove,
-        scrollTo: scrollTo,
+        ScrollTo: scrollTo,
         TimelinePointPositions: null,
         Stick: null,
         StickmanIsFlipped: false,
@@ -66,7 +66,7 @@
       vm.Viewport = [$document[0].getElementById('main').clientWidth, $document[0].getElementById('main').clientHeight];
       vm.InitHeigth = vm.Viewport[1];
       vm.scrollTargets = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
-      vm.ScrollIndexPosXY = [[-100, -500], [-450, 350], [0, 0]];
+      vm.ScrollIndexPosXY = [[-100, 0], [0, 0], [0, 0]];
       vm.TimelineYPosition = (vm.Viewport[1] * 20 / 100);
 
       function init() {
@@ -91,6 +91,7 @@
           e.preventDefault();
         }
       }, false);
+
       function moveOnArrow(event) {
         var stick = $document[0].getElementById('stickman');
         var posX = vm.StickPos[0];
@@ -146,51 +147,30 @@
         var StickBottom = vm.stick.getBoundingClientRect().bottom + 60;
         // var StickCenter = (vm.stick.getBoundingClientRect().right - vm.stick.getBoundingClientRect().left) / 2 + vm.stick.getBoundingClientRect().left;
         var StickCenter = vm.stick.getBoundingClientRect().left;
-        $log.log("StickBottom: " + StickBottom + "   StickCenter: " + StickCenter + "   Viewport: " + vm.Viewport[1]);
+        //$log.log("StickBottom: " + StickBottom + "   StickCenter: " + StickCenter + "   Viewport: " + vm.Viewport[1]);
         var target;
 
-        // Check if botttom of Page is reached
-        if (StickBottom >= (vm.Viewport[1])) {
-          if (vm.ScrollIndex[vm.ScrollIndex + 1] !== null) {
-            vm.ScrollIndex += 1;
-            target = vm.scrollTargets[vm.ScrollIndex];
-            var posXY = (vm.ScrollIndex+1)*vm.ScrollIndexPosXY[vm.ScrollIndex];
-            $log.log(posXY+"scrollindex: "+ (vm.ScrollIndex+1) +"indexposXY: "+ vm.ScrollIndexPosXY[vm.ScrollIndex]);
+        // Check if Elon runs out of bounds
+        if ((StickBottom >= (vm.Viewport[1])) || (StickBottom <= 100)) {
 
-            move(vm.stick, posXY[0], posXY[1], 2);
-            scrollTo(target);
+          // Check if botttom of Page is reached
+          if (StickBottom >= (vm.Viewport[1])) {
+            if (vm.ScrollIndex[vm.ScrollIndex + 1] !== null) {
+              vm.ScrollIndex += 1;
+            }
           }
-        }
-
-        // Check if top of Page is reached
-        else if (StickBottom <= 30) {
-          if (vm.ScrollIndex[vm.ScrollIndex - 1] !== null) {
-            vm.ScrollIndex -= 1;
-            target = vm.scrollTargets[vm.ScrollIndex];
-            $log.log(posXY);
-            move(vm.stick, posXY[0], posXY[1], 2);
-            scrollTo(target);
+          // Check if top of Page is reached
+          else {
+            if (vm.ScrollIndex[vm.ScrollIndex - 1] !== null) {
+              vm.ScrollIndex -= 1;
+            }
           }
+          target = vm.scrollTargets[vm.ScrollIndex];
+          var posXY = [vm.ScrollIndexPosXY[vm.ScrollIndex][0],(vm.ScrollIndexPosXY[vm.ScrollIndex][1]) + (vm.Viewport[1] * (vm.ScrollIndex))];
+          //$log.log("posXY: " + posXY + "| scrollindex: " + (vm.ScrollIndex + 1) + "| scrollindex: " + vm.ScrollIndexPosXY[vm.ScrollIndex]);
+          move(vm.stick, posXY[0], posXY[1], 2);
+          scrollTo(target);
         }
-        /*        switch (vm.ScrollIndex) {
-                  case 1: {
-                    posXY = [0, 0];
-                    break;
-                  }
-                  case 2: {
-                    posXY = [-100, 200];
-                    break;
-                  }
-                  case 3: {
-                    posXY = [,];
-                    break;
-                  }
-                  default: {
-                    $log.log('something went wrong');
-                  }
-
-                }
-                */
 
         // Check if Timeline Point is reached
         if (StickBottom < vm.TimelinePointPositions[0].y + 150 && StickBottom > vm.TimelinePointPositions[0].y - 150) {
