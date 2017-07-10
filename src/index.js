@@ -68,6 +68,10 @@
       vm.scrollTargets = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
       vm.ScrollIndexPosXY = [[0, 30], [-480, -460], [0, 0]];
       vm.TimelineYPosition = (vm.Viewport[1] * 20 / 100);
+      vm.cashAudio = new Audio("assets/sounds/cash.mp3");
+      vm.carAudio = new Audio("assets/sounds/carlock.wav");
+      vm.rocketAudio = new Audio("assets/sounds/rocket.wav");
+
 
       function init() {
         startQuotes(3000);
@@ -250,6 +254,18 @@
             vm.contentDivsConnector[lastDiv - 1] = "timeline-not-reached-connector";
             lastDiv--;
           }
+        }
+        if (newStatus === 1)
+        {
+           vm.cashAudio.play();
+        }
+        else if(newStatus===2)
+        {
+          vm.rocketAudio.play()
+        }
+        else if (newStatus ===3)
+        {
+          vm.carAudio.play();
         }
       }
       function getTimelineStatus() {
