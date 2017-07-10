@@ -40,6 +40,20 @@
         <div class='leg' ng-class="{'walking': vm.IsMoving}" id='left'></div>
         <div class='leg' ng-class="{'walking': vm.IsMoving}" id='right'></div>
       </div>
+      <div class="speech-bubble" ng-if="vm.speaking">
+        <p ng-if="vm.bubble[0]">
+          Beweg mich mit den Pfeiltasten!
+        </p>
+        <p ng-if="vm.bubble[1]">
+          Geh nach unten und sieh an was ich gemacht habe!
+        </p>
+        <p ng-if="vm.bubble[2]">
+          Lauf über die Kreise um andere Projekte anzusehen
+        </p>
+        <p ng-if="vm.bubble[3]">
+          Was mach ich wohl zur Zeit?
+        </p>
+      </div>
     </div>
 
     <section id="landing" class="wholePage">
