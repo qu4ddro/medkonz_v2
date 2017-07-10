@@ -22,7 +22,7 @@
         IsMoving: true,
         contentDivs: [false, false, false, false, false],
         DivPosition: ["div2", "div3", "div4", "div5"],
-        contentDivsClass: ["fa-circle-o", "fa-circle-o", "fa-circle-o", "fa-circle-o", "fa-circle-o"],
+        contentDivsClass: ["circle-empty", "circle-empty", "circle-empty", "circle-empty", "circle-empty"],
         contentDivsConnector: [],
         Comments: [false, false, false, false, false, false, false, false],
         StickPos: [0, 0], // x,y
@@ -91,7 +91,16 @@
           e.preventDefault();
         }
       }, false);
-
+      function startQuotes(timer) {
+        $timeout(function () {
+          var rnd = Math.floor(Math.random() * vm.Comments.length);
+          vm.Comments[rnd] = true;
+          $timeout(function () {
+            vm.Comments[rnd] = false;
+            startQuotes(0);
+          }, 5000);
+        }, timer);
+      }
       function getPos(item) {
         var CenterY = (item.getBoundingClientRect().bottom - item.getBoundingClientRect().top) / 2 + item.getBoundingClientRect().top;
         var CenterX = (item.getBoundingClientRect().right - item.getBoundingClientRect().left) / 2 + item.getBoundingClientRect().left;
@@ -147,8 +156,8 @@
         else {
           vm.StickmanIsFlipped = false;
         }
-        var TweenlightViewport = [vm.Viewport[0]/2,vm.Viewport[1]/2]
-        if (posX > (-1*TweenlightViewport[0]) && ( posX < (TweenlightViewport[0])) )  {
+        var TweenlightViewport = [vm.Viewport[0] / 2, vm.Viewport[1] / 2]
+        if (posX > (-1 * TweenlightViewport[0]) && (posX < (TweenlightViewport[0]))) {
           TweenLite.to(item, time, { x: posX, y: posY });
           vm.StickPos = [posX, posY];
         }
@@ -213,16 +222,7 @@
       function endmove(event) {
         vm.IsMoving = false;
       }
-      function startQuotes(timer) {
-        $timeout(function () {
-          var rnd = Math.floor(Math.random() * vm.Comments.length);
-          vm.Comments[rnd] = true;
-          $timeout(function () {
-            vm.Comments[rnd] = false;
-            startQuotes(0);
-          }, 5000);
-        }, timer);
-      }
+
       function showdiv(number) {
         setTimeline(number);
         setAllContentDivsFalse();
@@ -240,13 +240,13 @@
         }
         else if (newStatus >= lastDiv) {
           for (var i = 0; i <= newStatus; i++) {
-            vm.contentDivsClass[i] = "fa-circle timeline-reached";
+            vm.contentDivsClass[i] = "circle-full timeline-reached";
             vm.contentDivsConnector[i - 1] = "timeline-reached-connector";
           }
         }
         else if (newStatus < lastDiv) {
           for (var diff = lastDiv - newStatus; diff > 0; diff--) {
-            vm.contentDivsClass[lastDiv] = "fa-circle-o";
+            vm.contentDivsClass[lastDiv] = "circle-empty";
             vm.contentDivsConnector[lastDiv - 1] = "timeline-not-reached-connector";
             lastDiv--;
           }
@@ -271,7 +271,7 @@
       }
       function setAllContentDivsClassFalse() {
         for (var i = 0; i < vm.contentDivsClass.length; i++) {
-          vm.contentDivsClass[i] = "fa-circle-o";
+          vm.contentDivsClass[i] = "circle-empty";
         }
       }
       function setAllContentDivsConnectorBlack() {

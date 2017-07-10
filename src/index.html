@@ -64,7 +64,7 @@
 
       <div id="timeline-container" class="timeline-container">
         <div ng-repeat="div in vm.contentDivs track by $index" ng-click="vm.ShowDiv($index)" ng-class="vm.DivPosition[$index]">
-          <span id="timelinePoint{{$index}}" class="fa fa-3x timeline-circles" ng-class="vm.contentDivsClass[$index]"></span>
+          <span id="timelinePoint{{$index}}" class="timeline-circles" ng-class="vm.contentDivsClass[$index]"></span>
           <span class="timeline-not-reached-connector" ng-class="vm.contentDivsConnector[$index]" ng-if="!$last"></span>
         </div>
       </div>
