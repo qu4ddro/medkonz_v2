@@ -9,11 +9,11 @@ section {
 .contentBlock {
     clear: both;
     position: relative;
-    top: 30vh;
+    top: 20vh;
 
     .scrollable {
-      overflow-y: scroll;
-      max-height: 70vh;
+      overflow-y: none;
+      height: 80vh;
     }
     h2 {
       position: relative;
@@ -66,6 +66,13 @@ video {
 
 .textContainer-right{
     text-align: left;
+    margin-right: 2.5vw;
+    p {
+      text-align: left;
+    }
+    h3{
+      font-size: 20px;
+    }
 
 }
 
@@ -74,12 +81,13 @@ video {
     margin-left: 2.5vw;
 
     p {
-      text-align: right;
+      text-align: left;
     }
 }
 
 .container-paypal{
-  margin-top: 10vh;
+  margin-top: 8vh;
+  height: 200px;
 }
 
 .clear-left{
