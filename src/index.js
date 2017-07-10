@@ -66,7 +66,7 @@
       vm.Viewport = [$document[0].getElementById('main').clientWidth, $document[0].getElementById('main').clientHeight];
       vm.InitHeigth = vm.Viewport[1];
       vm.scrollTargets = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
-      vm.ScrollIndexPosXY = [[0, 0], [0, 0], [0, 0]];
+      vm.ScrollIndexPosXY = [[0, 30], [-480, -460], [0, 0]];
       vm.TimelineYPosition = (vm.Viewport[1] * 20 / 100);
 
       function init() {
@@ -200,13 +200,11 @@
           offset: 0,
           callbackBefore: function (element) {
             vm.scrolling = true;
-            $log.log('about to scroll to element', element);
             vm.IsMoving = true;
           },
           callbackAfter: function (element) {
             vm.scrolling = false;
             vm.IsMoving = false;
-            $log.log('scrolled to element', element);
           },
           containerId: 'custom-container-id'
         }

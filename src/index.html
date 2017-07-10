@@ -69,22 +69,24 @@
         </div>
       </div>
 
-      <div>
-
-        <div class="contentBlock" ng-if="vm.contentDivs[0]">
-          <h2>1995: Zip2</h2>
+      <div class="contentBlock" ng-if="vm.contentDivs[0]">
+        <h2>1995: Zip2</h2>
+        <div class="scrollable">
           <img class="image-left" src="assets/images/2_Zip2/Zip2.png">
           <div class="textContainer-right">
             <p>Zip2 war ein Unternehmen, das in erster Linie eine Online-Stadtführer-Software für Zeitungen zur Verfügung stellte
-              und lizenzierte. Elon Musk, sein Brunder Kimbal und Greg Kouri gründeten Zip2 mit dem Geld ihrer Eltern.</p>
+              und lizenzierte. Elon Musk, sein Brunder Kimbal und Greg Kouri gründeten Zip2 mit dem Geld ihrer Eltern.
+            </p>
             <p> 1996 erhielt Zip2 3 Millionen US-Dollar an Investitionen. Elon wurde zum Chief Technology Officer ernannt.</p>
             <p> 1999 wurde Zip2 von Compaq für 307 Millionen verkauft, wovon 22 Millionen an Elon gingen.</p>
           </div>
         </div>
+      </div>
 
-        <div class="contentBlock" ng-if="vm.contentDivs[1]">
-          <video src="assets/videos/3_paypal_Intro.mp4" autoplay muted loop></video>
-          <h2>1999: X.com / Paypal</h2>
+      <div class="contentBlock" ng-if="vm.contentDivs[1]">
+        <h2>1999: X.com / Paypal</h2>
+
+        <div class="scrollable">
           <div>
             <img class="image-left" src="assets/images/3_PayPal/paypal_logo.png">
             <div class="textContainer-right" style="text-align:center;">
@@ -123,12 +125,14 @@
               </p>
             </div>
           </div>
-
         </div>
+        <video src="assets/videos/3_paypal_Intro.mp4" autoplay muted loop></video>
+      </div>
 
-        <div class="contentBlock" ng-if="vm.contentDivs[2]">
-          <video src="assets/videos/5_this_is_spaceX.mp4" autoplay muted loop></video>
-          <h2>2002: SpaceX</h2>
+      <div class="contentBlock" ng-if="vm.contentDivs[2]">
+        <h2>2002: SpaceX</h2>
+
+        <div class="scrollable">
           <div>
             <img class="image-left" src="assets/images/5_SpaceX/logo.png">
             <div class="textContainer-right" style="text-align:center;">
@@ -153,12 +157,14 @@
                 zu erreichen, gegründet.</p>
             </div>
           </div>
-
         </div>
+        <video src="assets/videos/5_this_is_spaceX.mp4" autoplay muted loop></video>
+      </div>
 
-        <div class="contentBlock" ng-if="vm.contentDivs[3]">
-          <video src="assets/videos/4_tesla2.m4v" autoplay muted loop></video>
-          <h2>2003: Tesla Motors</h2>
+      <div class="contentBlock" ng-if="vm.contentDivs[3]">
+
+        <h2>2003: Tesla Motors</h2>
+        <div class="scrollable">
           <div>
             <img class="image-left" src="assets/images/4_Tesla/Logo_Tesla_Motors.svg.png">
             <div class="textContainer-right" style="text-align:center;">
@@ -177,16 +183,18 @@
           <div style="margin-top: 5vh; clear: both">
             <img class="image-left" src="assets/images/4_Tesla/Model X/section-exterior-primary.jpg">
             <div class="textContainer-right">
-              <p>Tesla ist derzeit der einzige Fahrzeughersteller, der einen emmissionsfreien Seriensportwagen in größeren Stückzahlen verkauft hat</p>
+              <p>Tesla ist derzeit der einzige Fahrzeughersteller, der einen emmissionsfreien Seriensportwagen in größeren Stückzahlen
+                verkauft hat</p>
             </div>
           </div>
-           <div style="margin-top: 5vh; clear: both">
+          <div style="margin-top: 5vh; clear: both">
             <img class="image-right" src="assets/images/4_Tesla/Musk with Tesla.jpg">
             <div class="textContainer-left">
               <p>Elon investierte bereits im Frühjahr 2004 in Tesla. Er ist CEO und Product Architect des Unternehmens</p>
               <p>Mitte 2104 gab die Firma unter ihm alle Patente frei, um die E-Auto Entwicklung anzutreiben.</p>
             </div>
           </div>
+          <video src="assets/videos/4_tesla2.m4v" autoplay muted loop></video>
         </div>
 
         <div class="contentBlock" ng-if="vm.contentDivs[4]">
@@ -204,9 +212,11 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="contentBlock" ng-if="vm.contentDivs[5]">
-          <h2>2017: The Boring Company</h2>
+      <div class="contentBlock" ng-if="vm.contentDivs[5]">
+        <h2>2017: The Boring Company</h2>
+        <div class="scrollable">
           <p class="textContainer">The Boring Company soll ein Unternehmen werden, dass den Verkehr in Großstädten regelt. Dazu wolle er eine Tunnelbohrmaschine
             bauen.
           </p>
@@ -218,13 +228,16 @@
                 </slide>
               </slidecontainer>
             </div>
-
           </div>
         </div>
+      </div>
+
     </section>
 
     <section id="closing" class="wholePage">
-      <a class="twitter-timeline" data-width="900" data-height="700" data-theme="dark" href="https://twitter.com/elonmusk">Tweets by elonmusk</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <h2> Was läuft gerade? </h2>
+      <a class="twitter-timeline" data-width="900" data-height="700" data-theme="dark" href="https://twitter.com/elonmusk">Tweets by elonmusk</a>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </section>
 
   </main>
