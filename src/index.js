@@ -9,7 +9,7 @@
       angular.extend(vm, vm, {
         ShowDiv: showdiv,
         $onInit: init(),
-        myInterval: 5000,
+        myInterval: 10000,
         noWrapSlides: false,
         active: 0,
         Move: moveOnArrow,
@@ -27,6 +27,8 @@
         Comments: [false, false, false, false, false, false, false, false],
         StickPos: [0, 0], // x,y
         scrolling: false,
+        speaking: false,
+        bubble: [false, false, false, false, false],
 
         imagesPersonal: [
           { image: 'assets/images/1_Persönlich/Elon-Musk.jpg', id: 0 },
@@ -66,7 +68,7 @@
       vm.Viewport = [$document[0].getElementById('main').clientWidth, $document[0].getElementById('main').clientHeight];
       vm.InitHeigth = vm.Viewport[1];
       vm.scrollTargets = [$document[0].getElementById('landing'), $document[0].getElementById('timeline'), $document[0].getElementById('closing')];
-      vm.ScrollIndexPosXY = [[0, 30], [-480, -460], [0, 0]];
+      vm.ScrollIndexPosXY = [[0, 30], [-520, -460], [0, 0]];
       vm.TimelineYPosition = (vm.Viewport[1] * 20 / 100);
       vm.cashAudio = new Audio("assets/sounds/cash.mp3");
       vm.carAudio = new Audio("assets/sounds/carlock.wav");
@@ -88,6 +90,14 @@
           ];
           showdiv(0);
         }, 1);
+        $timeout(function () {
+          vm.bubble[0] = true;
+          vm.speaking = true;
+          $timeout(function () {
+            setAllBubblesFalse();
+            vm.bubble[1] = true;
+          }, 3000)
+        }, 2500);
       }
       $window.addEventListener("keydown", function (e) {
         // space and arrow keys
@@ -160,10 +170,11 @@
         else {
           vm.StickmanIsFlipped = false;
         }
-        var TweenlightViewport = [vm.Viewport[0] / 2, vm.Viewport[1] / 2]
+        var TweenlightViewport = [vm.Viewport[0] / 2, vm.Viewport[1] / 2];
+        TweenLite.to(item, time, { x: posX, y: posY });
+        vm.StickPos = [posX, posY];
         if (posX > (-1 * TweenlightViewport[0]) && (posX < (TweenlightViewport[0]))) {
-          TweenLite.to(item, time, { x: posX, y: posY });
-          vm.StickPos = [posX, posY];
+
         }
       }
 
@@ -192,9 +203,29 @@
           }
           target = vm.scrollTargets[vm.ScrollIndex];
           var posXY = [vm.ScrollIndexPosXY[vm.ScrollIndex][0], (vm.ScrollIndexPosXY[vm.ScrollIndex][1]) + (vm.Viewport[1] * (vm.ScrollIndex))];
-          move(vm.stick, posXY[0], posXY[1], 2);
+          move(vm.stick, posXY[0], posXY[1], 3);
           scrollTo(target);
+          switch (vm.ScrollIndex) {
+            case 0: {
+              setAllBubblesFalse();
+              vm.bubble[1] = true;
+            }
+              break;
+            case 1: {
+              setAllBubblesFalse();
+              vm.bubble[2] = true;
+            }
+              break;
+            case 2: {
+              setAllBubblesFalse();
+              vm.bubble[3] = true;
+            }
+              break;
+
+          }
         }
+
+        // $log.log("StickBottom :" + StickBottom + "vm.TimelinePointPositions[0].y" + vm.TimelinePointPositions[0].y);
 
         // Check if Timeline Point is reached
         if (StickBottom < vm.TimelinePointPositions[0].y + 150 && StickBottom > vm.TimelinePointPositions[0].y - 150) {
@@ -218,9 +249,19 @@
           callbackAfter: function (element) {
             vm.scrolling = false;
             vm.IsMoving = false;
+            $timeout(function () {
+              vm.TimelinePointPositions = [
+                { x: $document[0].getElementById('timelinePoint0').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint0').getBoundingClientRect().top },
+                { x: $document[0].getElementById('timelinePoint1').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint1').getBoundingClientRect().top },
+                { x: $document[0].getElementById('timelinePoint2').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint2').getBoundingClientRect().top },
+                { x: $document[0].getElementById('timelinePoint3').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint3').getBoundingClientRect().top },
+                { x: $document[0].getElementById('timelinePoint4').getBoundingClientRect().left, y: $document[0].getElementById('timelinePoint4').getBoundingClientRect().top }
+              ];
+              showdiv(0);
+            }, 1);
           },
           containerId: 'custom-container-id'
-        }
+        };
         smoothScroll(target, options);
       }
       function endmove(event) {
@@ -283,6 +324,11 @@
       function setAllContentDivsFalse() {
         for (var i = 0; i < vm.contentDivs.length; i++) {
           vm.contentDivs[i] = false;
+        }
+      }
+      function setAllBubblesFalse() {
+        for (var i = 0; i < vm.bubble.length; i++) {
+          vm.bubble[i] = false;
         }
       }
       function setAllContentDivsClassFalse() {

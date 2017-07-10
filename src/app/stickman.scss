@@ -93,6 +93,29 @@ $bodyPartyWidth: 0.25em;
     animation-play-state:running !important;
 }
 
+.speech-bubble {
+	position: relative;
+	background: transparent;
+	border-radius: .4em;
+  left: 100px;
+  width: 150px;
+  border: 2px solid $stickmanColor;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 23px solid transparent;
+	border-right-color:  $stickmanColor;
+	border-left: 0;
+	margin-top: -23px;
+	margin-left: -23px;
+}
+
 .wobble {
 -webkit-animation: wobble 0.5s infinite;
 animation: wobble 0.5s infinite;
