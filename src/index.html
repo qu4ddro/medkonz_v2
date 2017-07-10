@@ -71,7 +71,7 @@
 
       <div class="contentBlock" ng-if="vm.contentDivs[0]">
         <div class="scrollable">
-          <img class="image-left" src="assets/images/2_Zip2/Zip2.png" style="position: relative; top: -1vh;">
+          <img class="image-left" src="assets/images/2_Zip2/Zip2.png" style="width:35vw;">
           <div class="textContainer-right">
             <p>Zip2 war ein Unternehmen, das in erster Linie eine Online-Stadtführer-Software für Zeitungen zur Verfügung stellte
               und lizenzierte. Elon Musk, sein Brunder Kimbal und Greg Kouri gründeten Zip2 mit dem Geld ihrer Eltern.
@@ -85,7 +85,7 @@
       <div class="contentBlock" ng-if="vm.contentDivs[1]">
         <div class="scrollable">
           <div>
-            <img class="image-left" src="assets/images/3_PayPal/paypal_logo.png" style="position: relative; top: -2vh;">
+            <img class="image-left logo" src="assets/images/3_PayPal/paypal_logo.png">
             <div class="textContainer-right" style="text-align:center; margin-top:2vh;">
               <h3 style="text-align:center; ">
                 Mit PayPal können Sie einkaufen, Geld senden und anfordern und vieles mehr. Und das mit nur einem Konto
@@ -111,7 +111,7 @@
           </div>
 
           <div style="margin-top: 5vh;">
-            <img class="image-right" src="assets/images/1_Persönlich/elon-musk1.jpeg" style="width:20vw;">
+            <img class="image-right logo" src="assets/images/1_Persönlich/elon-musk1.jpeg" style="width:20vw;">
             <div class="textContainer-left">
               <p>1999 gründete Elon das Unternehmen X.com, das ein Online-Bezahlsystem via E-Mail entwickelte.</p>
               <p>Schon 2000 fusionierte X.com mit dem Konkurenten Confinity. Daraus entstand PayPal, das wichtigste Online-Bezahlsystem
@@ -129,8 +129,8 @@
       <div class="contentBlock" ng-if="vm.contentDivs[2]">
         <div class="scrollable">
           <div>
-            <img class="image-left" src="assets/images/5_SpaceX/logo.png" style="position: relative; top: -4vh;" >
-            <div class="textContainer-right" style="text-align:center; margin-top:4vh;">
+            <img class="image-left logo" src="assets/images/5_SpaceX/logo.png">
+            <div class="textContainer-right" style="text-align:center; margin-top:2vh;">
               <h3 style="text-align:center;">
                 SpaceX entwirft, produziert und startet fortgeschrittene Raketen und Raumfahrzeuge.
               </h3>
@@ -139,8 +139,8 @@
           <div style="margin-top: 5vh;">
             <img class="image-right" src="assets/images/5_SpaceX/launch.jpg" style="position: relative; width: 50vw; top: -5vh;">
             <div class="textContainer-left" style="text-align:center; margin-top:10vh;">
-              <p>Das Unternehmen wurde 2002 von Elon Musk gegründet um die Raufahrttechnik zu revolutionieren und Menschen das Leben auf anderen
-                Planeten zu ermöglichen</p>
+              <p>Das Unternehmen wurde 2002 von Elon Musk gegründet um die Raufahrttechnik zu revolutionieren und Menschen das
+                Leben auf anderen Planeten zu ermöglichen</p>
               <p>Seit 2008 ist SpaceX für die Versorgungsflüge zu ISS beauftragt.</p>
               <p>Damit hat Elon Musk die erste Firma, der es gelang mit einer vollständig privat finanzierten Raketee den Orbit
                 zu erreichen, gegründet.</p>
@@ -154,7 +154,7 @@
       <div class="contentBlock" ng-if="vm.contentDivs[3]">
         <div class="scrollable">
           <div>
-            <img class="image-left" src="assets/images/4_Tesla/Logo_Tesla_Motors.svg.png" style="position: relative; top: -2vh;">
+            <img class="image-left logo" src="assets/images/4_Tesla/Logo_Tesla_Motors.svg.png">
             <div class="textContainer-right" style="text-align:center; margin-top:2vh;">
               <h3 style="text-align:center;">
                 Tesla entwirft und produziert verschiedene Elektroautos die den Übergang zu einem nachhaltigen Transportwesen beschleunigen
@@ -171,7 +171,7 @@
             </div>
           </div>
           <div style="margin-top: 15vh; clear: both">
-            <img class="image-left" src="assets/images/4_Tesla/Elon-Musk.jpg"style="width:25vw; position: relative; top: -10vh;">
+            <img class="image-left" src="assets/images/4_Tesla/Elon-Musk.jpg" style="width:25vw; position: relative; top: -4vh;">
             <div class="textContainer-right">
               <p>Elon investierte bereits im Frühjahr 2004 in Tesla. Er ist CEO und Product Architect des Unternehmens</p>
               <p>Mitte 2104 gab die Firma unter ihm alle Patente frei, um die E-Auto Entwicklung anzutreiben.</p>
@@ -180,42 +180,32 @@
 
           <video src="assets/videos/4_tesla2.m4v" autoplay muted loop></video>
         </div>
-
-        <div class="contentBlock" ng-if="vm.contentDivs[4]">
-          <h2>2013: Hyperloop</h2>
-          <p class="textContainer">SMusk stellt Hyperloop vor, dabei handelt es sich um ein Projekt für Personen- und Güterverkehr. In einer Röhre,
-            in der Vakuum herrscht wird eine Kapsel auf ca. 1200km/h beschleunigt. Somit können Langstrecken schneller als
-            mit dem Flugzeug oder dem Zug zurückgelegt werden.</p>
-          <div class="mediaContainer">
-            <div ng-carousel ng-carousel-name="HyperloopCarousel" ng-carousel-timer="5000">
-              <slidecontainer class="carousel-slides">
-                <slide ng-repeat="image in vm.imagesHyperloop">
-                  <img ng-src="{{image.image}}" style="margin:auto;">
-                </slide>
-              </slidecontainer>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div class="contentBlock" ng-if="vm.contentDivs[5]">
-        <h2>2017: The Boring Company</h2>
+      <div class="contentBlock" ng-if="vm.contentDivs[4]">
         <div class="scrollable">
-          <p class="textContainer">The Boring Company soll ein Unternehmen werden, dass den Verkehr in Großstädten regelt. Dazu wolle er eine Tunnelbohrmaschine
-            bauen.
-          </p>
-          <div class="mediaContainer">
-            <div ng-carousel ng-carousel-name="BoringCarousel" ng-carousel-timer="5000">
-              <slidecontainer class="carousel-slides">
-                <slide ng-repeat="image in vm.imagesTheboringcompany">
-                  <img ng-src="{{image.image}}" style="margin:auto;">
-                </slide>
-              </slidecontainer>
+          <div>
+            <img class="image-left logo" src="assets/images/6_Hyperloop/hyperloop_logorebrand_2016.png">
+            <div class="textContainer-right" style="text-align:center; margin-top:2vh;">
+              <h3 style="text-align:center;">
+                Hyperloop ist eine neue Möglichkeit Menschen mit der Geschwindidgkeit eines Flugzeuges zu transportieren. Dabei kostet es
+                soviel wie ein Bus-Ticket.
+              </h3>
+            </div>
+          </div>
+          <div style="margin-top: 10vh;">
+            <img class="image-right" src="assets/images/6_Hyperloop/hyperloop-transportation.jpg" style="width:35vw;">
+            <div class="textContainer-left" style="text-align:center">
+            <p>Musk stellt Hyperloop vor, dabei handelt es sich um ein Projekt für Personen- und Güterverkehr. In einer Röhre,
+              in der Vakuum herrscht wird eine Kapsel auf ca. 1200km/h beschleunigt. Somit können Langstrecken schneller
+              als mit dem Flugzeug oder dem Zug zurückgelegt werden.</p>
             </div>
           </div>
         </div>
+        <video src="assets/videos/hyperloop.mp4" autoplay muted loop></video>
       </div>
 
+      </div>
     </section>
 
     <section id="closing" class="wholePage">

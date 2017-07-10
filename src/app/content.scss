@@ -47,6 +47,7 @@ video {
   position: absolute;
   left:0;
   bottom: 0;
+  top: -5vh;
   opacity: .5;
 }
 
@@ -94,4 +95,9 @@ video {
  clear: left;
 }
 
-
+.logo{
+  background-color: white;
+  padding: 20px;
+  position: relative;
+  top: -4vh;
+}
